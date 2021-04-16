@@ -37,13 +37,12 @@ if [ -z "$INPUT_COMMIT_MESSAGE" ]
 then
   INPUT_COMMIT_MESSAGE="Update from https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
 fi
-
+git pull
 echo "Adding git commit"
 git add .
 if git status | grep -q "Changes to be committed"
 then
   git commit --message "$INPUT_COMMIT_MESSAGE"
-  git pull
   echo "Pushing git commit"
   git push -u origin HEAD:$OUTPUT_BRANCH
 else
